@@ -2,7 +2,6 @@ import 'package:socketcluster_client/socketcluster_client.dart';
 import 'dart:async';
 
 class MyListener extends BasicListener {
-
   @override
   void onAuthentication(Socket socket, bool status) {
     print('onAuthentication: socket $socket status $status');
@@ -18,9 +17,9 @@ class MyListener extends BasicListener {
     print('onConnected: socket $socket');
     new Timer.periodic(const Duration(seconds: 2), (_) {
       print('Attempting to send');
-      socket.emit('sampleClientEvent', {'message': 'This is an object with a message property'});
+      socket.emit('sampleClientEvent',
+          {'message': 'This is an object with a message property'});
     });
-
   }
 
   @override
@@ -36,10 +35,10 @@ class MyListener extends BasicListener {
 }
 
 main() async {
-  var socket = await Socket.connect('ws://localhost:8000/socketcluster/', listener: new MyListener());
+  var socket = await Socket.connect('ws://localhost:8000/socketcluster/',
+      listener: new MyListener());
   socket.on('rand', (name, data, ack) {
     print('got message $data from event $name');
     ack(name, 'No error', 'Hi there buddy');
   });
-  //while(true);
 }

@@ -1,8 +1,8 @@
 name: socketcluster_client
-description: A new flutter package project.
+description: SocketCluster.io Client for Dart
 version: 0.0.1
-author:
-homepage:
+author: Paul DeMarco
+homepage: pauldemarco.com
 
 dependencies:
 
