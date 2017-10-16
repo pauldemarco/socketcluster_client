@@ -6,6 +6,7 @@ SocketCluster Client is the client-side component of SocketCluster.
 ```dart
   var socket = await Socket.connect('ws://localhost:8000/socketcluster/',
       listener: new MyListener());
+      
   socket.on('rand', (name, data, ack) {
     print('got message $data from event $name');
     ack(name, 'No error', 'Hi there buddy');
