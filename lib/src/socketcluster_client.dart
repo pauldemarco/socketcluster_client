@@ -84,8 +84,8 @@ class Socket extends Emitter {
     } else {
 //      print('Message received: $message');
 
-      var map = JSON.decode(message);
-      var data = map['data'];
+      dynamic map = jsonDecode(message as String);
+      dynamic data = map['data'];
       int rid = map['rid'];
       int cid = map['cid'];
       String event = map['event'];
@@ -95,12 +95,13 @@ class Socket extends Emitter {
       switch (Parser.parse(data, rid, cid, event)) {
         case ParseResult.ISAUTHENTICATED:
 //          print('IS authenticated got called');
-          id = data['id'];
-          listener.onAuthentication(this, data['isAuthenticated']);
+          id = data['id'] as String;
+          bool auth = data['isAuthenticated'] as bool;
+          listener.onAuthentication(this, auth);
           subscribeChannels();
           break;
         case ParseResult.PUBLISH:
-          handlePublish(data['channel'], data['data']);
+          handlePublish(data['channel'] as String, data['data']);
 //          print('Publish got called');
           break;
         case ParseResult.REMOVETOKEN:
@@ -108,7 +109,7 @@ class Socket extends Emitter {
 //          print('Removetoken got called');
           break;
         case ParseResult.SETTOKEN:
-          listener.onSetAuthToken(data['token'], this);
+          listener.onSetAuthToken(data['token'] as String, this);
 //          print('Set token got called');
           break;
         case ParseResult.EVENT:
@@ -126,7 +127,7 @@ class Socket extends Emitter {
             if (mapObj != null) {
               AckCall fn = mapObj[1];
               if (fn != null) {
-                fn(mapObj[0], map['error'], map['data']);
+                fn(mapObj[0] as String, map['error'], map['data']);
               } else {
 //                print('Ack function is null');
               }
@@ -140,11 +141,11 @@ class Socket extends Emitter {
   }
 
   AckCall ack(int cid) {
-    return (name, error, data) {
+    return (name, dynamic error, dynamic data) {
       var message = {
-        'error': error,
-        'data': data,
-        'rid': cid, // FIXME: rid -> cid?
+        'error': error as String,
+        'data': data as String,
+        'rid': cid as String, // FIXME: rid -> cid?
       };
       var json = jsonEncode(message);
       _socket.add(json);
@@ -153,7 +154,9 @@ class Socket extends Emitter {
 
   Socket emit(String event, dynamic data, [AckCall ack]) {
     int count = ++_counter;
-    var message = {'event': event, 'data': data};
+    var message = new Map<String, dynamic>();
+    message['event'] = event;
+    message['data'] = data;
     if (ack != null) {
       message['cid'] = count;
       _acks[count] = getAckObject(event, ack);
@@ -190,7 +193,7 @@ class Socket extends Emitter {
     int count = ++_counter;
     var message = {
       'event': '#publish',
-      'data': {'channel': channel, 'data': data},
+      'data': {'channel': channel, 'data': data as Object},
       'cid': count
     };
     if (ack != null) _acks[count] = getAckObject(channel, ack);
@@ -200,7 +203,7 @@ class Socket extends Emitter {
   }
 
   List<dynamic> getAckObject(String event, AckCall ack) {
-    return [event, ack];
+    return [event, ack] as List<dynamic>;
   }
 
   void subscribeChannels() {
