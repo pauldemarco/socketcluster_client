@@ -63,7 +63,7 @@ class Socket extends Emitter {
       'cid': ++_counter
     };
     // Note: ported C# code had Formatting.Indented parameter
-    var json = JSON.encode(authObject);
+    dynamic json = jsonEncode(authObject);
     _socket.add(json);
     listener.onConnected(this);
   }
@@ -146,7 +146,7 @@ class Socket extends Emitter {
         'data': data,
         'rid': cid, // FIXME: rid -> cid?
       };
-      var json = JSON.encode(message);
+      var json = jsonEncode(message);
       _socket.add(json);
     };
   }
@@ -158,7 +158,7 @@ class Socket extends Emitter {
       message['cid'] = count;
       _acks[count] = getAckObject(event, ack);
     }
-    var json = JSON.encode(message);
+    var json = jsonEncode(message);
 //    print(json);
     _socket.add(json);
     return this;
@@ -172,7 +172,7 @@ class Socket extends Emitter {
       'cid': count
     };
     if (ack != null) _acks[count] = getAckObject(channel, ack);
-    var json = JSON.encode(message);
+    var json = jsonEncode(message);
     _socket.add(json);
     return this;
   }
@@ -181,7 +181,7 @@ class Socket extends Emitter {
     int count = ++_counter;
     var message = {'event': '#unsubscribe', 'data': channel, 'cid': count};
     if (ack != null) _acks[count] = getAckObject(channel, ack);
-    var json = JSON.encode(message);
+    var json = jsonEncode(message);
     _socket.add(json);
     return this;
   }
@@ -194,7 +194,7 @@ class Socket extends Emitter {
       'cid': count
     };
     if (ack != null) _acks[count] = getAckObject(channel, ack);
-    var json = JSON.encode(message);
+    var json = jsonEncode(message);
     _socket.add(json);
     return this;
   }
