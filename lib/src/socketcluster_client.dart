@@ -78,14 +78,14 @@ class Socket extends Emitter {
     return channel;
   }
 
-  void handleMessage(dynamic message) {
+  void handleMessage(String message) {
     if (message == "#1") {
       _socket.add("#2");
     } else {
 //      print('Message received: $message');
 
-      dynamic map = jsonDecode(message as String);
-      dynamic data = map['data'];
+      Map map = jsonDecode(message);
+      Map data = map['data'];
       int rid = map['rid'];
       int cid = map['cid'];
       String event = map['event'];
@@ -152,9 +152,9 @@ class Socket extends Emitter {
     };
   }
 
-  Socket emit(String event, dynamic data, [AckCall ack]) {
+  Socket emit(String event, Object data, [AckCall ack]) {
     int count = ++_counter;
-    var message = new Map<String, dynamic>();
+    var message = new Map<String, Object>();
     message['event'] = event;
     message['data'] = data;
     if (ack != null) {
@@ -162,7 +162,6 @@ class Socket extends Emitter {
       _acks[count] = getAckObject(event, ack);
     }
     var json = jsonEncode(message);
-//    print(json);
     _socket.add(json);
     return this;
   }
@@ -189,11 +188,11 @@ class Socket extends Emitter {
     return this;
   }
 
-  Socket publish(String channel, dynamic data, [AckCall ack]) {
+  Socket publish(String channel, Object data, [AckCall ack]) {
     int count = ++_counter;
     var message = {
       'event': '#publish',
-      'data': {'channel': channel, 'data': data as Object},
+      'data': {'channel': channel, 'data': data},
       'cid': count
     };
     if (ack != null) _acks[count] = getAckObject(channel, ack);
@@ -203,7 +202,7 @@ class Socket extends Emitter {
   }
 
   List<dynamic> getAckObject(String event, AckCall ack) {
-    return [event, ack] as List<dynamic>;
+    return [event, ack];
   }
 
   void subscribeChannels() {
