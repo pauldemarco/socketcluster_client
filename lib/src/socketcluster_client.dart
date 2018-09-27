@@ -78,7 +78,7 @@ class Socket extends Emitter {
     return channel;
   }
 
-  void handleMessage(String message) {
+  void handleMessage(dynamic message) {
     if (message == "#1") {
       _socket.add("#2");
     } else {
