@@ -84,8 +84,8 @@ class Socket extends Emitter {
     } else {
 //      print('Message received: $message');
 
-      Map map = jsonDecode(message);
-      Map data = map['data'];
+      var map = jsonDecode(message);
+      var data = map['data'];
       int rid = map['rid'];
       int cid = map['cid'];
       String event = map['event'];
