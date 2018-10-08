@@ -1,5 +1,6 @@
 # SocketCluster Dart Client
 
+[![Build Status](https://travis-ci.com/MichaelMarner/socketcluster_client.svg?branch=master)](https://travis-ci.com/MichaelMarner/socketcluster_client) 
 [![Coverage Status](https://coveralls.io/repos/github/pauldemarco/socketcluster_client/badge.svg?branch=master)](https://coveralls.io/github/pauldemarco/socketcluster_client?branch=master)
 
 SocketCluster Client is the client-side component of SocketCluster.
