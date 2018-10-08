@@ -1,3 +1,8 @@
+## 0.0.3
+
+* Allow listener to be optional.
+* Added test framework (Thanks to Michael Marner).
+
 ## 0.0.2
 
 * Added license.
