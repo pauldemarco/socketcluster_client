@@ -65,11 +65,15 @@ class Socket extends Emitter {
     // Note: ported C# code had Formatting.Indented parameter
     dynamic json = jsonEncode(authObject);
     _socket.add(json);
-    listener.onConnected(this);
+    if (listener != null) {
+      listener.onConnected(this);
+    }
   }
 
   void onSocketDone() {
-    listener.onDisconnected(this);
+    if (listener != null) {
+      listener.onDisconnected(this);
+    }
   }
 
   Channel createChannel(String name) {
@@ -97,7 +101,9 @@ class Socket extends Emitter {
 //          print('IS authenticated got called');
           id = data['id'] as String;
           bool auth = data['isAuthenticated'] as bool;
-          listener.onAuthentication(this, auth);
+          if (listener != null) {
+            listener.onAuthentication(this, auth);
+          }
           subscribeChannels();
           break;
         case ParseResult.PUBLISH:
@@ -109,7 +115,9 @@ class Socket extends Emitter {
 //          print('Removetoken got called');
           break;
         case ParseResult.SETTOKEN:
-          listener.onSetAuthToken(data['token'] as String, this);
+          if (listener != null) {
+            listener.onSetAuthToken(data['token'] as String, this);
+          }
 //          print('Set token got called');
           break;
         case ParseResult.EVENT:
