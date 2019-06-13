@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:socketcluster_client/src/parser.dart';
-import 'package:socketcluster_client/src/socket_platform_io.dart';
-
+import './parser.dart';
+import './socket_platform_io.dart';
 import './socket_platform.dart';
 import './channel.dart';
 import './reconnect_strategy.dart';
@@ -27,14 +26,6 @@ class Socket extends Emitter {
   static const int OPEN = 1;
   static const int CLOSING = 2;
   static const int CLOSED = 3;
-
-  /*Socket(this.url, this.listener, {this.authToken, this.strategy});
-
-  connect() {
-    WebSocket.connect(url)
-        .then(onSocketOpened)
-        .catchError((e) => listener.onConnectError(this, e));
-  }*/
 
   Socket._internal(this._socket, {this.authToken, this.strategy, this.listener}) {
     this._socket = _socket;
@@ -105,11 +96,7 @@ class Socket extends Emitter {
     };
     // Note: ported C# code had Formatting.Indented parameter
     dynamic json = jsonEncode(authObject);
-    if (globalSocketPlatform == IoSocketPlatform) {
-      _socket.add(json);
-    } else {
-      _socket.send(json);
-    }
+    sendOrAdd(json);
     if (listener != null) {
       listener.onConnected(this);
     }

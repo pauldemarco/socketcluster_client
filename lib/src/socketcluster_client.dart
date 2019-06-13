@@ -1,4 +1,3 @@
-export 'package:socketcluster_client/src/socket_interface.dart';
 export 'package:socketcluster_client/src/emitter.dart';
 export 'package:socketcluster_client/src/parser.dart';
 export 'package:socketcluster_client/src/channel.dart';
