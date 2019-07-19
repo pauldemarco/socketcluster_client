@@ -1,5 +1,3 @@
-part of socketcluster_client;
-
 enum ParseResult {
   ISAUTHENTICATED,
   PUBLISH,

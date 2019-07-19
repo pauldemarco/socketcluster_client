@@ -1,4 +1,4 @@
-part of socketcluster_client;
+
 
 typedef Listener(String name, dynamic data);
 

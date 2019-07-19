@@ -1,5 +1,4 @@
-part of socketcluster_client;
-
+import 'socket.dart';
 ///Interface for listening to a socket through callbacks
 ///
 abstract class BasicListener {

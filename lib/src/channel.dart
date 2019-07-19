@@ -1,4 +1,5 @@
-part of socketcluster_client;
+import 'emitter.dart';
+import 'socket.dart';
 
 class Channel
 {
