@@ -1,3 +1,7 @@
+## 0.1.0
+
+* Allow "platform" to opt for io or html (Thanks to Keal Jones)
+
 ## 0.0.3
 
 * Allow listener to be optional.
