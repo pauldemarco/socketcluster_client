@@ -1,7 +1,5 @@
 import 'socket_platform_interface.dart';
 
-export 'socket_platform_interface.dart';
-
 // Use conditional imports in order to automatically setup the platform without any user side setup.
 export 'socket_platform_interface.dart'
   if (dart.library.io) './socket_platform_io.dart'
