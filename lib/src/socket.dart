@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import './parser.dart';
 import './socket_platform.dart';
-import './socket_platform_interface.dart' show IoSocketPlatformType;
 import './channel.dart';
 import './reconnect_strategy.dart';
 import './basic_listener.dart';
@@ -29,7 +28,7 @@ class Socket extends Emitter {
 
   Socket._internal(this._socket, {this.authToken, this.strategy, this.listener}) {
     this._socket = _socket;
-    if (globalSocketPlatform == IoSocketPlatformType) {
+    if (globalSocketPlatform == IoSocketPlatform) {
       _socket.listen(handleMessage).onDone(onSocketDone);
       onSocketOpened();
     } else {
@@ -39,7 +38,7 @@ class Socket extends Emitter {
 
   static Future<Socket> connect(String url,
       {String authToken, ReconnectStrategy strategy, BasicListener listener}) async {
-    if (globalSocketPlatform == IoSocketPlatformType){
+    if (globalSocketPlatform == IoSocketPlatform){
       var socket = await globalSocketPlatform.webSocket(url);
       return new Socket._internal(
         socket,
@@ -66,7 +65,7 @@ class Socket extends Emitter {
   }
 
   sendOrAdd([json]){
-    if (globalSocketPlatform == IoSocketPlatformType) {
+    if (globalSocketPlatform == IoSocketPlatform) {
       _socket.add(json);
     } else {
       _socket.send(json);
@@ -116,7 +115,7 @@ class Socket extends Emitter {
 
   void handleMessage([dynamic messageEvent]) {
     String message;
-    if (globalSocketPlatform != IoSocketPlatformType) {
+    if (globalSocketPlatform != IoSocketPlatform) {
       message = messageEvent.data;
     } else {
       message = messageEvent;

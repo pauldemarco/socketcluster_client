@@ -1,14 +1,13 @@
 import 'dart:html';
 
-import 'socket_platform_interface.dart' show HttpSocketPlatformType, SocketPlatform;
-import 'socket_platform.dart';
+import 'socket_platform_interface.dart' as socketinterface;
 
 const HttpSocketPlatform httpSocketPlatform = const HttpSocketPlatform();
-class HttpSocketPlatform extends HttpSocketPlatformType {
+class HttpSocketPlatform extends socketinterface.HttpSocketPlatform {
   const HttpSocketPlatform();
 
   @override
   dynamic webSocket([url]) => new WebSocket(url);
 }
 
-SocketPlatform globalSocketPlatform = httpSocketPlatform;
+const socketinterface.SocketPlatform RuntimeSocketPlatform = httpSocketPlatform;
