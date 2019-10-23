@@ -6,7 +6,7 @@ import 'socket_platform_interface.dart'
 
 import 'socket_platform_interface.dart' show SocketPlatform;
 
-SocketPlatform _globalSocketPlatform = RuntimeSocketPlatform ;
+SocketPlatform _globalSocketPlatform = RuntimeSocketPlatform;
 
 /// inherit this global one.
 SocketPlatform get globalSocketPlatform => _globalSocketPlatform;
