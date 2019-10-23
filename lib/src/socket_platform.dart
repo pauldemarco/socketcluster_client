@@ -11,7 +11,6 @@ SocketPlatform _globalSocketPlatform = RuntimeSocketPlatform ;
 /// inherit this global one.
 SocketPlatform get globalSocketPlatform => _globalSocketPlatform;
 set globalSocketPlatform(SocketPlatform socketPlatform) {
-  print('setting socketPlatform too: $socketPlatform');
   if (socketPlatform == null) {
     throw new ArgumentError('socket: Global socket platform '
         'implementation must not be null.');
