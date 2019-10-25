@@ -1,4 +1,13 @@
-import 'socket_platform_io.dart';
+export 'socket_platform_interface.dart';
+
+import 'socket_platform_interface.dart'
+  if (dart.library.js) './socket_platform_http.dart'
+  if (dart.library.io) './socket_platform_io.dart';
+
+import 'socket_platform_interface.dart' show SocketPlatform;
+
+SocketPlatform _globalSocketPlatform = RuntimeSocketPlatform;
+
 /// inherit this global one.
 SocketPlatform get globalSocketPlatform => _globalSocketPlatform;
 set globalSocketPlatform(SocketPlatform socketPlatform) {
@@ -9,18 +18,8 @@ set globalSocketPlatform(SocketPlatform socketPlatform) {
   // Todo: log the socket platform implementation
   _globalSocketPlatform = socketPlatform;
 }
-SocketPlatform _globalSocketPlatform = IoSocketPlatform();
 
-/// Reset the globally configured socet platform.
+/// Reset the globally configured socket platform.
 void resetGlobalSocketPlatform() {
   _globalSocketPlatform = null;
-}
-
-
-
-abstract class SocketPlatform {
-  const SocketPlatform();
-
-  /// Constructs a new [WebSocket] instance.
-  dynamic webSocket([url]);
 }

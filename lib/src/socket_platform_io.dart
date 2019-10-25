@@ -1,9 +1,13 @@
 import 'dart:io';
-import 'socket_platform.dart';
+
+import 'socket_platform_interface.dart' as socketinterface;
 
 const IoSocketPlatform ioSocketPlatform = const IoSocketPlatform();
-class IoSocketPlatform extends SocketPlatform {
+
+class IoSocketPlatform extends socketinterface.IoSocketPlatform {
   const IoSocketPlatform();
 
-  Function webSocket([url]) => WebSocket.connect;
+  Future<WebSocket> webSocket([url]) => WebSocket.connect(url);
 }
+
+const socketinterface.SocketPlatform RuntimeSocketPlatform = ioSocketPlatform;
