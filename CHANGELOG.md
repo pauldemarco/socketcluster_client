@@ -1,3 +1,7 @@
+## 0.2.0
+
+* Add support for Web based projects
+
 ## 0.1.0
 
 * Allow "platform" to opt for io or html (Thanks to Keal Jones)
