@@ -3,7 +3,7 @@ import 'dart:async';
 
 class MyListener extends BasicListener {
   @override
-  void onAuthentication(Socket socket, bool status) {
+  void onAuthentication(Socket socket, bool? status) {
     print('onAuthentication: socket $socket status $status');
   }
 
@@ -28,7 +28,7 @@ class MyListener extends BasicListener {
   }
 
   @override
-  void onSetAuthToken(String token, Socket socket) {
+  void onSetAuthToken(String? token, Socket socket) {
     print('onSetAuthToken: socket $socket token $token');
     socket.authToken = token;
   }

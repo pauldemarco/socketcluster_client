@@ -17,4 +17,4 @@ class IoSocketPlatform extends SocketPlatform {
   const IoSocketPlatform();
 }
 
-const SocketPlatform RuntimeSocketPlatform = null;
+const SocketPlatform? RuntimeSocketPlatform = null;

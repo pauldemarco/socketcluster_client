@@ -16,7 +16,7 @@ class ReconnectStrategy
    * The maximum number of reconnection attempts that will be made before giving up. If null, reconnection attempts will be continue to be made forever.
    * Default: null
    */
-  final int maxAttempts;
+  final int? maxAttempts;
 
   var attmptsMade = 0;
 
@@ -36,5 +36,5 @@ class ReconnectStrategy
     return reconnectInterval;
   }
 
-  bool areAttemptsComplete() => attmptsMade >= maxAttempts;
+  bool areAttemptsComplete() => attmptsMade >= maxAttempts!;
 }

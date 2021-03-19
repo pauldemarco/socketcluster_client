@@ -8,7 +8,7 @@ enum ParseResult {
 }
 
 class Parser {
-  static ParseResult parse(dynamic dataObject, int rid, int cid, String event) {
+  static ParseResult parse(dynamic dataObject, int? rid, int? cid, String? event) {
     if (event == null)
       return rid == 1 ? ParseResult.ISAUTHENTICATED : ParseResult.ACKRECEIVE;
     switch (event) {

@@ -14,7 +14,7 @@ abstract class BasicListener {
   ///
   void onConnectError(Socket socket, dynamic e);
 
-  void onAuthentication(Socket socket, bool status);
+  void onAuthentication(Socket socket, bool? status);
 
-  void onSetAuthToken(String token, Socket socket);
+  void onSetAuthToken(String? token, Socket socket);
 }

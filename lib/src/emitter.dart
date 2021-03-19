@@ -1,8 +1,8 @@
 
 
-typedef Listener(String name, dynamic data);
+typedef Listener(String? name, dynamic data);
 
-typedef AckListener(String name, dynamic data, AckCall ack);
+typedef AckListener(String? name, dynamic data, AckCall ack);
 
 typedef AckCall(String name, dynamic error, dynamic data);
 
@@ -44,29 +44,29 @@ class Emitter {
     return this;
   }
 
-  Emitter handleEmit(String event, dynamic object) {
+  Emitter handleEmit(String? event, dynamic object) {
     if (_singleCallbacks.containsKey(event)) {
-      var listener = _singleCallbacks[event];
+      var listener = _singleCallbacks[event!]!;
       listener(event, object);
     }
     return this;
   }
 
-  Emitter handleEmitAck(String event, dynamic object, AckCall ack) {
+  Emitter handleEmitAck(String? event, dynamic object, AckCall ack) {
     if (_singleAckCallbacks.containsKey(event)) {
-      var listener = _singleAckCallbacks[event];
+      var listener = _singleAckCallbacks[event!]!;
       listener(event, object, ack);
     }
     return this;
   }
 
-  Emitter handlePublish(String event, dynamic object) {
+  Emitter handlePublish(String? event, dynamic object) {
     if (_publishCallbacks.containsKey(event)) {
-      var listener = _publishCallbacks[event];
+      var listener = _publishCallbacks[event!]!;
       listener(event, object);
     }
     return this;
   }
 
-  bool hasEventAck(String event) => _singleAckCallbacks.containsKey(event);
+  bool hasEventAck(String? event) => _singleAckCallbacks.containsKey(event);
 }
