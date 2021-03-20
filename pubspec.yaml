@@ -1,6 +1,6 @@
 name: socketcluster_client
 description: SocketCluster.io Client for Dart
-version: 0.2.0
+version: 0.3.0
 authors:
   - Paul DeMarco <paulmdemarco@gmail.com>
   - Michael Marner <michael@20papercups.net>
